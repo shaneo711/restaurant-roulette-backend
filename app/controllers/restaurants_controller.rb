@@ -1,10 +1,12 @@
 class RestaurantsController < ApplicationController
   def index
-    render json: Restaurant.all
+    @restaurants = Restaurant.all
+    render json: @restaurants
   end
 
   def show
-    render json: Restaurant.find(params[:id])
+    @restaurant = Restaurant.find(params[:id])
+    render json: @restaurant
   end
 
   def create
@@ -19,7 +21,7 @@ class RestaurantsController < ApplicationController
 
   private
 
-  def post_params
+  def restaurant_params
     params.require(:restaurant).permit(:name, :address, :phone)
   end
 end
